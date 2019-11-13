@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: getstartedjava-jaylee
-        image: de.icr.io/cr-namespace-jaylee/getstartedjava:v0.1
+        image: de.icr.io/cr-namespace-jaylee/getstartedjava:latest
         env:
           - name: VERSION
             value: "1"
