@@ -1,0 +1,21 @@
+#deploy scripts
+
+echo "downloads directory create"
+mkdir downloads
+PATH="downloads:$PATH"
+
+
+  curl -SsL "$ISTIOCTL_DWONLOAD_URL" -o "istioctl-1.4.0-beta.4-linux.tar.gz"
+  tar -zxvf istioctl-1.4.0-beta.4-linux.tar.gz
+  mv istioctl ./downloads/istioctl
+  chmod +x downloads/istioctl
+
+echo "istioctl version"
+istioctl version
+
+istioctl kube-inject -f deployment1.yaml | kubectl apply -f -
+
+kubectl describe pod getstartedjava-jaylee
+
+
+# deployment1.yaml 파일을 수정할 것,,,  이미지 이름을 build 와 맞춰야 하고, 이미지 이름도 환경변수로 처리 가능할지 고민해 볼것!
