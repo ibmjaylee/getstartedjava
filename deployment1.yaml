@@ -1,5 +1,5 @@
 kind: Deployment
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 metadata:
   name: getstartedjava-jaylee
   labels:
@@ -7,6 +7,9 @@ metadata:
     version: v1
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: getstartedjava-jaylee
   template:
     metadata:
       labels:
@@ -32,22 +35,20 @@ spec:
                 name: cloudant-secret
                 key: dbPassword
         ports:
-        - containerPort: 9080
+        - containerPort: 80
         readinessProbe:
           httpGet:
             path: /
             port: 9080
-          initialDelaySeconds: 10
-          periodSeconds: 5
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  annotations:
-    webapi: "true"
+#  annotations:
+#    webapi: "true"
   name: getstartedjava-jaylee
-  labels:
-    app: getstartedjava-jaylee
+#  labels:
+#    app: getstartedjava-jaylee
 spec:
   selector:
     app: getstartedjava-jaylee
